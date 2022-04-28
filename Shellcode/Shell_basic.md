@@ -56,7 +56,7 @@ void main(int argc, char *argv[]) {
 }
 ```
 
-## 풀이 과정
+## 문제 분석 
 
  처음 문제를 풀기전에는 mmap이라는 생소한 함수가 있어서 굉장히 당황스러웠다.
 
@@ -77,7 +77,9 @@ sc = (void *)shellcode; 이다.
 이 문제의 목적은 제시한 플래그 파일을 읽어서 플래그를 획득(출력)하는 것이다. 
 즉 우리는 orw shellcode를 이용하는 exploit script를 작성하면 된다.
 
-자 그렇다면 exploit script를 작성해보자. 쉽게 설명하기 위해 주석과 함께 설명하겠다.
+## exploit script 
+
+다음은 해당 문제에 대한 exploit script로 파이썬 모듈 중 pwntools를 사용하여 작성하였다. 
 
 ```python
 from pwn import* 
