@@ -74,8 +74,8 @@ sc = (void *)shellcode; 이다.
 이 값을 함수포인터에 type casting을 하여 대입하는 것이다. 
 그렇다면 함수포인터에는 shellcode의 시작주소가 담기게 될 것이기때문에 sc를 호출하는 순간 쉘코드를 실행시킬 수 있는 것이다.
 
-이 문제의 목적은 제시한 플래그 파일을 읽어서 플래그를 획득(출력)하는 것이다. 
-즉 우리는 orw shellcode를 이용하는 exploit script를 작성하면 된다.
+이 문제를 풀기위해서는 문제에서 제시한 플래그 파일을 읽어서 플래그를 획득(출력)해야한다. 
+즉 우리는 orw shellcode를 삽입한 exploit script를 작성하면 된다.
 
 ## exploit script 
 
