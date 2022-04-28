@@ -60,11 +60,7 @@ void main(int argc, char *argv[]) {
 
  처음 문제를 풀기전에는 mmap이라는 생소한 함수가 있어서 굉장히 당황스러웠다.
 
-공부를 해서 찾아보니 
-
-
-문제에 적힌 코드 
-```C 
+공부를 해서 찾아보니 문제에 적힌 코드 
 char *shellcode = mmap(NULL, 0x1000, PROT_READ | PROT_WRITE | PROT_EXEC, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);``` 의 뜻은 핵심만 말하자면 offset(마지막 argument 0)에서 시작해서 0x1000바이트만큼을 start주소(첫번째 argument NULL)로 맵핑한다는 의미다. PROT인자는 메모리 보호모드의 종류이다. 여기서 fd값은 -1이다. 스택오버플로우에서 찾아보니 메모리 할당하는 방법 중의 하나라고 한다. 
 
 유심히 봐야할 코드는 
