@@ -116,5 +116,5 @@ print(p.recv())
 p.send(asm(code))
 
 #플래그 형식은 DH{...}이므로 출력데이터를 '}'가 출력될 때까지 받아서 출력. 
-print(p.recvuntil("}"))
+print(p.recvuntil('}'))
 ```
