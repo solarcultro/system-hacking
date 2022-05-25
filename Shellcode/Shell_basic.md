@@ -69,7 +69,7 @@ read(0, shellcode, 0x1000);
 
 sc = (void *)shellcode; 이다.
 
-표준입력을 통해 shellcode의 값을 입력받고 
+표준입력을 통해 shellcode에 데이터를 고 
 
 이 값을 함수포인터에 type casting을 하여 대입하는 것이다. 
 그렇다면 함수포인터에는 shellcode의 시작주소가 담기게 될 것이기때문에 sc를 호출하는 순간 셸코드를 실행시킬 수 있는 것이다.
