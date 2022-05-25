@@ -71,9 +71,6 @@ sc = (void *)shellcode;
 표준 입력을 통해 shellcode에 데이터를 저장한 후 함수포인터(sc)에 type casting을 하여 대입한다. 이렇게되면 함수포인터에는 shellcode의 시작주소가 담기게 된다.  이 문제의 목표는 제시한 플래그 파일을 읽어서 플래그를 획득(출력)하는 것이므로 orw shellcode를 실행해야한다. 따라서 shellcode에 orw shellcode를 담게 된다면 sc를 호출하는 순간 shellcode에 담긴 orw shellcode를 실행시킬 수 있을 것이다. 
 
 ## Exploit script 
-
-다음은 해당 문제에 대한 exploit script로, 파이썬 모듈 중 pwntools를 사용하여 작성하였다. 
-
 ```python
 # importing pwntools
 from pwn import* 
