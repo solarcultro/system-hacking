@@ -68,7 +68,7 @@ char *shellcode = mmap(NULL, 0x1000, PROT_READ | PROT_WRITE | PROT_EXEC, MAP_PRI
 read(0, shellcode, 0x1000);
 sc = (void *)shellcode; 
 ```
-표준 입력을 통해 shellcode에 데이터를 저장한 후 함수포인터(sc)에 type casting을 하여 대입한다. 이렇게되면 함수포인터에는 shellcode의 시작주소가 담기게 될 것이기때문에 sc를 호출하는 순간 셸코드를 실행시킬 수 있다. 이 문제를 풀기위해서는 문제에서 제시한 플래그 파일을 읽어서 플래그를 획득(출력)해야한다. 즉 우리는 orw shellcode를 삽입한 exploit script를 작성하면 된다.
+표준 입력을 통해 shellcode에 데이터를 저장한 후 함수포인터(sc)에 type casting을 하여 대입한다. 이렇게되면 함수포인터에는 shellcode의 시작주소가 담기게 될 것이기때문에 sc를 호출하는 순간 shellcode에 담긴 셸코드를 실행시킬 수 있다. 이 문제를 풀기위해서는 문제에서 제시한 플래그 파일을 읽어서 플래그를 획득(출력)해야한다. 즉 우리는 orw shellcode를 삽입한 exploit script를 작성하면 된다.
 
 ## Exploit script 
 
